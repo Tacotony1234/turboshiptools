@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button">Complete Order</button>
+        </form>
+    </div>
+</body>
+</html>
+<button id="checkout-button">Pay with Stripe</button>
+<script type="text/javascript">
+    var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+    
+    var checkoutButton = document.getElementById('checkout-button');
+    checkoutButton.addEventListener('click', function () {
+        stripe.redirectToCheckout({
+            sessionId: '{{ CHECKOUT_SESSION_ID }}'
+        }).then(function (result) {
+            if (result.error) {
+                alert(result.error.message);
+            }
+        });
+    });
+</script>

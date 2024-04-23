@@ -1,0 +1,21 @@
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+    
+        fetch('{% url "register" %}', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "{% url 'login' %}";
+            } else {
+                alert("There were errors. Please try again.");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+    </script>
+    

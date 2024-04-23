@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <h2>Ryobi Products</h2>
+    <!-- Display messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% for product in products %}
+    <div class="product-item">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">${{ product.price }}</p>
+        <!-- Simple form to add to cart -->
+        <form action="{% url 'add_to_cart' product.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="blue-button">Add to Cart</button>
+        </form>
+    </div>
+    {% empty %}
+    <p>No products found.</p>
+    {% endfor %}
+</main>
+{% endblock %}

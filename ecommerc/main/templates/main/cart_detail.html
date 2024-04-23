@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_filters %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; }
+        .cart-header, .cart-details, .cart-summary { padding: 10px; background-color: #f8f9fa; }
+        .cart-item { display: flex; align-items: center; padding: 20px; border-top: 1px solid #dee2e6; }
+        .cart-item img { width: 150px; margin-right: 20px; }
+        .cart-item-details { flex-grow: 1; }
+        .quantity-selector { margin-right: 10px; }
+        .cart-summary { float: right; width: 30%; padding: 20px; border: 1px solid #dee2e6; }
+        .button { background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block; }
+        .button:hover { background-color: #0056b3; }
+        .footer { clear: both; margin-top: 40px; text-align: center; }
+        .nav { padding: 10px 0; background-color: #f0f0f0; }
+        .nav a { padding: 10px 15px; text-decoration: none; color: #333; font-weight: bold; }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/dewalt/">Dewalt Products</a>
+        <a href="/makita/">Makita Products</a>
+        <a href="/ryobi/">Ryobi Products</a>
+        <a href="/milwaukee/">Milwaukee Products</a>
+    </div>
+    <div class="container">
+        <div class="cart-header">
+            <h1>SHOPPING CART</h1>
+        </div>
+
+        <div class="cart-details">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                <div class="cart-item-details">
+                    <h2>{{ item.product.name }}, {{ item.product.size }} - ${{ item.product.price }}</h2>
+                    <label for="quantity-{{ item.id }}">Quantity:</label>
+                    <input type="number" id="quantity-{{ item.id }}" name="quantity" class="quantity-selector" value="{{ item.quantity }}" min="1" data-productid="{{ item.id }}">
+                    <span>$ {{ item.product.price|multiply:item.quantity }}</span>
+                    <a href="{% url 'remove_from_cart' item.id %}" class="button">Remove</a>
+                </div>
+            </div>
+            {% empty %}
+            <p>Your cart is empty.</p>
+            {% endfor %}
+        </div>
+
+        <div class="cart-summary">
+            <h3>Summary</h3>
+            <p>{{ cart_items|length }} item(s)</p>
+            <p>Shipping: Calculated at checkout</p>
+            <p>Total (tax excl.): ${{ cart_total_excl_tax }}</p>
+            <p>Total (tax incl.): ${{ cart_total_incl_tax }}</p>
+            <p>Taxes: Calculated at checkout</p>
+            <a href="{% url 'checkout' %}" class="button">PROCEED TO CHECKOUT</a>
+        </div>
+
+        <div class="footer">
+            <p>Get our latest news and special sales</p>
+        </div>
+    </div>
+</body>
+</html>

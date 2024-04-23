@@ -1,0 +1,16 @@
+/* ... (existing styles) ... */
+
+/* Add this new style for the cart message */
+.cart-message {
+    position: fixed;
+    top: 20px; /* adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0f0; /* green for success */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    /* add more styling as needed */
+  }
+  

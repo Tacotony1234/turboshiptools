@@ -1,0 +1,60 @@
+html {
+    height: 100%;
+  }
+  
+  body {
+    min-height: 100%;
+    margin: 0; /* Remove default margin */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  nav ul {
+    background-color: #007bff; /* Example color - blue */
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    display: inline-block; /* or use 'inline-flex' for better alignment and spacing */
+  }
+  
+  nav a {
+    display: block;
+    padding: 10px 15px;
+    color: white; /* Text color for nav links */
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; /* Dark footer background */
+    color: white; /* Footer text color */
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  /* Content area styling */
+  .content {
+    flex: 1; /* Grow to fill available space */
+    padding: 20px; /* Add some padding around content */
+  }
+  
+  /* Updated styles for images in the content area to make them smaller and consistent */
+  .content img {
+    max-width: 100%; /* Images can be as wide as their container, but no wider */
+    max-height: 250px; /* Maximum height for all images */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto 20px; /* Center images and add space below */
+    object-fit: contain; /* Ensures the image is fully contained within its box, preserving aspect ratio */
+  }
+  

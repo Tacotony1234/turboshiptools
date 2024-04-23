@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <h2>New Products</h2>
+    {% for product in new_products %}
+    <div class="product-item">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">${{ product.price }}</p>
+        <!-- Example: Link to add to cart (you would need to set up the URL and view accordingly) -->
+        <a href="{% url 'add_to_cart' product.id %}" class="blue-button">Add to Cart</a>
+    </div>
+    {% empty %}
+    <p>No new products found.</p>
+    {% endfor %}
+</main>
+{% endblock %}

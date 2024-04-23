@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Turboship Tools</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'dewalt_products' %}">Dewalt</a></li>
+            <li><a href="{% url 'milwaukee_products' %}">Milwaukee</a></li>
+            <li><a href="{% url 'makita_products' %}">Makita</a></li>
+            <li><a href="{% url 'ryobi_products' %}">Ryobi</a></li>
+            <li><a href="{% url 'cart_detail' %}">Cart</a></li>
+            <li><a href="{% url 'register' %}">Create Account</a></li>
+            <!-- New Sign In Link -->
+            <li><a href="{% url 'login' %}">Sign In</a></li>
+        </ul>
+    </nav>
+
+    {% block content %}
+    <!-- This block will be overridden by child templates -->
+    {% endblock %}
+
+    <footer>
+        <section id="newsletter">
+            <!-- Newsletter subscription form -->
+        </section>
+        <section id="links">
+            <!-- Quick links or site map -->
+        </section>
+        <section id="store-info">
+            <!-- Store information -->
+        </section>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Logout Successful</h2>
+<p>You have been successfully logged out.</p>
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'home' %}";  // Redirect to home after logout
+    }, 5000);  // 5000 milliseconds = 5 seconds
+</script>
+{% endblock %}
